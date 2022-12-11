@@ -1,0 +1,15 @@
+project('oklab-int', 'c', version: '0.1', default_options: ['warning_level=3'])
+
+cc = meson.get_compiler('c')
+lm = cc.find_library('m', required: false)
+
+executable('test-cbrt-int', files('test_cbrt_int.c', 'oklab_int.c'), dependencies: [lm])
+executable('test-linear2srgb-int', files('test_linear2srgb_int.c', 'oklab_int.c', 'oklab_ref.c'), dependencies: [lm])
+executable('test-srgb2linear-int', files('test_srgb2linear_int.c', 'oklab_int.c', 'oklab_ref.c'), dependencies: [lm])
+executable('test-linear2srgb-f32-fast', files('test_linear2srgb_f32_fast.c', 'oklab_f32_fast.c', 'oklab_ref.c'), dependencies: [lm])
+executable('test-srgb2linear-f32-fast', files('test_srgb2linear_f32_fast.c', 'oklab_f32_fast.c', 'oklab_ref.c'), dependencies: [lm])
+executable('test-oklab-int',  files('test_oklab_int.c', 'oklab_int.c', 'oklab_ref.c'), dependencies: [lm])
+executable('probe-extremum', files('probe_extremum.c', 'oklab_int.c', 'oklab_ref.c'), dependencies: [lm])
+executable('bench-oklab-int', files('bench_oklab_int.c', 'oklab_int.c'))
+executable('bench-oklab-ref', files('bench_oklab_ref.c', 'oklab_ref.c'), dependencies: [lm])
+executable('bench-oklab-f32-fast', files('bench_oklab_f32_fast.c', 'oklab_f32_fast.c'), dependencies: [lm])
